@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitor de Mentes</title>
+    <style>
+        body {
+            background: rgb(70, 142, 236);
+            font: normal 15pt Arial;
+        }
+
+        header {
+            color: white;
+            text-align: center;
+        }
+
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            width: 500px;
+            margin: auto;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.507);
+        }
+
+        footer {
+            color: white;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* BARRA DE LOADING */
+        #loading {
+            height: 20px;
+            background-color: #ddd;
+            margin-top: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #progress {
+            height: 100%;
+            background-color: #4CAF50;
+            transition: width 0.1s ease-in-out;
+            /* Adiciona uma transição suave à largura */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Leitor de Mentes</h1>
+    </header>
+    <section>
+        <div>
+            <p>Pense em um número de 1 a 10 e digite-o:</p>
+            <input type="number" id="num"><br>
+            <input type="button" value="Pensar" id="pens" onclick="pensar()">
+        </div>
+        <div id="loading">
+            <div id="progress" style="width: 0%;"></div>
+        </div>
+        <div id="res"></div>
+    </section>
+    <footer>
+        <p>&copy; Brunno Nogueira</p>
+    </footer>
+    <script>
+        function pensar() {
+            var n = document.getElementById('num');
+            var res = document.getElementById('res');
+            var loadBar = document.getElementById('loading');
+            var progBar = document.getElementById('progress');
+
+            res.innerHTML = ''; // Limpa qualquer mensagem anterior
+            loadBar.style.display = 'block'; // Exibe a barra de loading
+
+            var valor = Number(n.value); // aqui vamos pegar o valor do input e converter para um número. depois na linha abaixo é feita novamente uma confirmação de que é um número para depois verificar se o número está no intervalo de 1 a 10.
+            if (isNaN(Number(n.value)) || valor < 1 || valor > 10) {
+                res.innerHTML = 'Apenas números de 1 a 10';
+                loadBar.style.display = 'none';
+            } else {
+                // Simulando um processo de carregamento
+                var loadTime = 4000; // 4 segundos
+                var intervTime = 100; // intervalo de atualização da barra em milissegundos
+                var progIncrement = (intervTime / loadTime) * 100;
+                var progress = 0
+
+                var interval = setInterval(function () {
+                    progress += progIncrement
+                    progBar.style.width = progress + '%'
+
+                    if (progress >= 25){
+                        res.innerHTML = 'Analisando pensamentos...'
+                    }
+
+                    if (progress >= 50){
+                        res.innerHTML = 'Processando memória...'
+                    }
+                    
+                    if(progress >= 75){
+                        res.innerHTML = 'Renderizando conexão cognitiva...'
+                    }
+                    if (progress >= 100) {
+                        clearInterval(interval); // para parar a barra quando chegar a 100
+                        res.innerHTML = `Você pensou no número ${valor}`;
+                        loadBar.style.display = 'none'; // esconde a barra de loading
+                    }
+                }, intervTime);
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+<!-- ESTA É A VERSÃO ANTERIOR DO CÓDIGO, QUE NÃO TEM AS MENSAGENS ENQUANTO A BARRA DE LOADING CARREGA
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo de Exercício</title>
+    <style>
+        body {
+            background: rgb(70, 142, 236);
+            font: normal 15pt Arial;
+        }
+
+        header {
+            color: white;
+            text-align: center;
+        }
+
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            width: 500px;
+            margin: auto;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.507);
+        }
+
+        footer {
+            color: white;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* BARRA DE LOADING */
+        #loading {
+            height: 20px;
+            background-color: #ddd;
+            margin-top: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #progress {
+            height: 100%;
+            background-color: #4CAF50;
+            transition: width 0.1s ease-in-out;
+            /* Adiciona uma transição suave à largura */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Leitor de Mentes</h1>
+    </header>
+    <section>
+        <div>
+            <p>Pense em um Número de 1 a 10 e digite-o:</p>
+            <input type="number" id="num"><br>
+            <input type="button" value="Pensar" id="pens" onclick="pensar()">
+        </div>
+        <div id="loading">
+            <div id="progress" style="width: 0%;"></div>
+        </div>
+        <div id="res"></div>
+    </section>
+    <footer>
+        <p>&copy; Brunno Nogueira</p>
+    </footer>
+    <script>
+        function pensar() {
+            var n = document.getElementById('num');
+            var res = document.getElementById('res');
+            var loadBar = document.getElementById('loading');
+            var progBar = document.getElementById('progress');
+
+            res.innerHTML = ''; // Limpa qualquer mensagem anterior
+            loadBar.style.display = 'block'; // Exibe a barra de loading
+
+            var valor = Number(n.value); // aqui vamos pegar o valor do input e converter para um número. depois na linha abaixo é feita novamente uma confirmação de que é um número para depois verificar se o número está no intervalo de 1 a 10.
+            if (isNaN(Number(n.value)) || valor < 1 || valor > 10) {
+                res.innerHTML = 'Apenas números de 1 a 10';
+                loadBar.style.display = 'none';
+            } else {
+                // Simulando um processo de carregamento
+                var loadTime = 4000; // 4 segundos
+                var intervTime = 100; // intervalo de atualização da barra em milissegundos
+                var progIncrement = (intervTime / loadTime) * 100;
+
+                var interval = setInterval(function () {
+                    progBar.style.width = parseFloat(progBar.style.width) + progIncrement + '%';
+
+                    if (parseFloat(progBar.style.width) >= 100) {
+                        clearInterval(interval); // para parar a barra quando chegar a 100
+                        res.innerHTML = `Você pensou no número ${valor}`;
+                        loadBar.style.display = 'none'; // esconde a barra de loading
+                    }
+                }, intervTime);
+            }
+        }
+    </script>
+</body>
+</html>
+-->
